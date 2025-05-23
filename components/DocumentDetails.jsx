@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const DocumentDetails = () => {
+const DocumentDetails = ({ verificationData }) => {
   return (
     <div className="inline-block container  mx-auto md:text-[13px] mb-4 font-calibri">
       <table className="w-full border-collapse">
@@ -18,7 +18,7 @@ const DocumentDetails = () => {
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
               <Link
-                href="/document/show/1182/product"
+                href={`/document/show/${verificationData?.urlNumber}/product`}
                 // target="_blank"
                 // rel="noopener noreferrer"
               >
@@ -32,7 +32,7 @@ const DocumentDetails = () => {
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
               <Link
-                href="/document/show/1182/product"
+                href={`/document/show/${verificationData?.urlNumber}/portfolio`}
                 // target="_blank"
                 // rel="noopener noreferrer"
               >

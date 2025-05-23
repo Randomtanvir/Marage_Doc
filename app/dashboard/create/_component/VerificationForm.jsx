@@ -1,11 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function VerificationForm({
   isEdit = false,
   verifactionData = {},
 }) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm({
     defaultValues: {
       transactionNumber: "VN1674343",
@@ -19,8 +23,8 @@ export default function VerificationForm({
       verifierName: "Foreign Ministry - Oman",
       verificationStatus: "Approved",
       verificationDateTime: "13-04-2025 11:45:36",
-      urlLink: "2025-04-13-digital-attestation-result-copy-copy-6",
-      urlNumber: "1458",
+      urlLink: "2025-04-13-digital-attestation-result-copy-copy-1",
+      urlNumber: "1400",
     },
   });
 
@@ -66,29 +70,45 @@ export default function VerificationForm({
     }
 
     try {
+      setLoading(true);
       const res = await fetch(
         isEdit
           ? `/api/verification/${verifactionData._id}`
           : "/api/verification",
         {
-          method: isEdit ? "PUT" : "POST",
+          method: isEdit ? "PATCH" : "POST",
           body: formData,
         }
       );
 
       if (!res.ok) throw new Error("Something went wrong");
       const result = await res.json();
-      alert(result.message);
+      toast.success(
+        isEdit
+          ? "Verification updated successfully!"
+          : "Verification created successfully!"
+      );
+      router.push("/dashboard/lists");
     } catch (err) {
       console.error(err);
       alert("Submission failed.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loader"></span>
+      </div>
+    );
+  }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-xl mx-auto p-4 bg-white rounded shadow space-y-4"
+      className="max-w-xl mx-auto p-4 mt-4 bg-white rounded shadow space-y-4"
     >
       <h2 className="text-2xl font-semibold mb-4 text-center">
         {isEdit ? "Edit Verification" : "Add New Verification"}
@@ -130,6 +150,7 @@ export default function VerificationForm({
 
       <button
         type="submit"
+        disabled={loading}
         className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition"
       >
         {isEdit ? "Update" : "Submit"}

@@ -1,6 +1,7 @@
 import React from "react";
-import VerificationForm from "../../page";
+
 import { getSingleVerificationData } from "@/utils/fetcher";
+import VerificationForm from "../../create/_component/VerificationForm";
 
 const EditPage = async ({ params }) => {
   const { id } = params;

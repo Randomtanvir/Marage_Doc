@@ -1,4 +1,4 @@
-const TransactionDetails = () => {
+const TransactionDetails = ({ verificationData }) => {
   return (
     <div className="inline-block container  mx-auto md:text-[13px] mb-4 font-calibri">
       <table className="w-full border-collapse">
@@ -15,7 +15,7 @@ const TransactionDetails = () => {
               Transaction Number
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              VN1674343
+              {verificationData?.transactionNumber}
             </td>
           </tr>
           <tr>
@@ -23,7 +23,7 @@ const TransactionDetails = () => {
               Payment ID
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              202569014675801
+              {verificationData?.paymentId}
             </td>
           </tr>
           <tr>
@@ -31,7 +31,7 @@ const TransactionDetails = () => {
               Total Payment
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              OMR 25.75
+              {verificationData?.totalPayment}
             </td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@ const TransactionDetails = () => {
               Transaction Date
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              13 APR 2025
+              {verificationData?.transactionDate}
             </td>
           </tr>
         </tbody>

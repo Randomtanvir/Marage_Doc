@@ -1,4 +1,4 @@
-const VerificationDetails = () => {
+const VerificationDetails = ({ verificationData }) => {
   return (
     <div className="inline-block container  mx-auto md:text-[13px] mb-4 font-calibri">
       <table className="w-full border-collapse">
@@ -15,7 +15,7 @@ const VerificationDetails = () => {
               Verifier Name
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              Foreign Ministry - Oman
+              {verificationData?.verifierName}
             </td>
           </tr>
           <tr>
@@ -23,7 +23,7 @@ const VerificationDetails = () => {
               Verification
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              Status Approved
+              {verificationData?.verificationStatus}
             </td>
           </tr>
           <tr>
@@ -31,7 +31,7 @@ const VerificationDetails = () => {
               Verification Date & Time
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              13-04-2025 11:45:36
+              {verificationData?.verificationDateTime}
             </td>
           </tr>
         </tbody>

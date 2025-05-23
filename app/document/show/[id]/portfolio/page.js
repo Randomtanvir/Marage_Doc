@@ -10,7 +10,7 @@ const page = async ({ params }) => {
     <section className="w-full bg-white">
       <Button />
       <div className="mt-10 md:mt-5">
-        {data?.OriginalDocuments?.map((doc, index) => (
+        {data?.AttestedDocuments?.map((doc, index) => (
           <div key={index} className="flex flex-col items-center">
             <img
               src={doc}

@@ -1,15 +1,11 @@
-import localFont from "next/font/local";
+import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const robotoCondensed = Roboto_Condensed({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
 });
 
 export const metadata = {
@@ -20,9 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#f5f7fa]`}
-      >
+      <body className={`${robotoCondensed.variable} antialiased bg-[#f5f7fa]`}>
+        <Toaster position="top-center" reverseOrder={false} />
         {children}
       </body>
     </html>

@@ -1,4 +1,4 @@
-const CandidateDetails = () => {
+const CandidateDetails = ({ verificationData }) => {
   return (
     <div className="inline-block container  mx-auto md:text-[13px] mb-4 font-calibri">
       <table className="w-full border-collapse">
@@ -15,7 +15,7 @@ const CandidateDetails = () => {
               Document Type
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              Marriage certificate
+              {verificationData?.documentType}
             </td>
           </tr>
           <tr>
@@ -23,7 +23,7 @@ const CandidateDetails = () => {
               Applicant Name
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              Mohammad Karim
+              {verificationData?.applicantName}
             </td>
           </tr>
           <tr>
@@ -31,7 +31,7 @@ const CandidateDetails = () => {
               Email Id
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              MohammadKarim@gmail.com
+              {verificationData?.email}
             </td>
           </tr>
           <tr>
@@ -39,7 +39,7 @@ const CandidateDetails = () => {
               Phone Number
             </td>
             <td className="border border-black text-[#1B6394] font-semibold ">
-              78997544
+              {verificationData?.phoneNumber}
             </td>
           </tr>
         </tbody>

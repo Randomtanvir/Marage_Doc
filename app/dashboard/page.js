@@ -1,139 +1,31 @@
-"use client";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
+import Link from "next/link";
+import { Plus, List } from "lucide-react";
 
-export default function VerificationForm({
-  isEdit = false,
-  verifactionData = {},
-}) {
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      transactionNumber: "VN1674343",
-      paymentId: "202569014675801",
-      totalPayment: "OMR 25.75",
-      transactionDate: "13 APR 2025",
-      documentType: "Marriage certificate",
-      applicantName: "Mohammad Karim",
-      email: "MohammadKarim@gmail.com",
-      phoneNumber: "78997544",
-      verifierName: "Foreign Ministry - Oman",
-      verificationStatus: "Approved",
-      verificationDateTime: "13-04-2025 11:45:36",
-      urlLink: "2025-04-13-digital-attestation-result-copy-copy-6",
-      urlNumber: "1458",
-    },
-  });
-
-  const formFields = [
-    { label: "Transaction Number", name: "transactionNumber" },
-    { label: "Payment ID", name: "paymentId" },
-    { label: "Total Payment", name: "totalPayment" },
-    { label: "Transaction Date", name: "transactionDate" },
-    { label: "Document Type", name: "documentType" },
-    { label: "Applicant Name", name: "applicantName" },
-    { label: "Email ID", name: "email" },
-    { label: "Phone Number", name: "phoneNumber" },
-    { label: "Verifier Name", name: "verifierName" },
-    { label: "Verification Status", name: "verificationStatus" },
-    { label: "Verification Date & Time", name: "verificationDateTime" },
-    { label: "URL Link", name: "urlLink" },
-    { label: "URL Number", name: "urlNumber" },
-  ];
-
-  useEffect(() => {
-    if (isEdit && verifactionData) {
-      reset(verifactionData);
-    }
-  }, [isEdit, verifactionData, reset]);
-
-  const onSubmit = async (data) => {
-    const formData = new FormData();
-
-    formFields.forEach((field) => {
-      formData.append(field.name, data[field.name] || "");
-    });
-
-    if (data.originalDocuments?.length) {
-      for (let i = 0; i < data.originalDocuments.length; i++) {
-        formData.append("originalDocuments", data.originalDocuments[i]);
-      }
-    }
-
-    if (data.attestedDocuments?.length) {
-      for (let i = 0; i < data.attestedDocuments.length; i++) {
-        formData.append("attestedDocuments", data.attestedDocuments[i]);
-      }
-    }
-
-    try {
-      const res = await fetch(
-        isEdit
-          ? `/api/verification/${verifactionData._id}`
-          : "/api/verification",
-        {
-          method: isEdit ? "PATCH" : "POST",
-          body: formData,
-        }
-      );
-
-      if (!res.ok) throw new Error("Something went wrong");
-      const result = await res.json();
-      alert(result.message);
-    } catch (err) {
-      console.error(err);
-      alert("Submission failed.");
-    }
-  };
-
+const DashboardPage = () => {
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-xl mx-auto p-4 mt-4 bg-white rounded shadow space-y-4"
-    >
-      <h2 className="text-2xl font-semibold mb-4 text-center">
-        {isEdit ? "Edit Verification" : "Add New Verification"}
-      </h2>
+    <div className="flex flex-col gap-6 justify-center items-center h-screen bg-gray-50 px-4">
+      <h1 className="text-3xl font-bold text-gray-800 mb-8">Dashboard</h1>
 
-      {formFields.map((field) => (
-        <div key={field.name} className="flex flex-col">
-          <label className="mb-1 text-sm font-medium text-gray-700">
-            {field.label}
-          </label>
-          <input
-            {...register(field.name)}
-            className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-        </div>
-      ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-2xl">
+        <Link
+          href="/dashboard/create"
+          className="flex items-center gap-3 p-5 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition"
+        >
+          <Plus className="w-5 h-5" />
+          <span className="text-base font-medium">Add a Certificate</span>
+        </Link>
 
-      <div>
-        <label className="block mb-2 font-medium">Original Documents</label>
-        <input
-          type="file"
-          multiple
-          {...register("originalDocuments")}
-          className="border p-2 rounded"
-          accept="image/*"
-        />
+        <Link
+          href="/dashboard/lists"
+          className="flex items-center gap-3 p-5 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
+        >
+          <List className="w-5 h-5" />
+          <span className="text-base font-medium">Certificate List</span>
+        </Link>
       </div>
-
-      <div>
-        <label className="block mb-2 font-medium">Attested Documents</label>
-        <input
-          type="file"
-          multiple
-          {...register("attestedDocuments")}
-          className="border p-2 rounded"
-          accept="image/*"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full py-2 px-4 bg-green-600 text-white font-semibold rounded hover:bg-green-700 transition"
-      >
-        {isEdit ? "Update" : "Submit"}
-      </button>
-    </form>
+    </div>
   );
-}
+};
+
+export default DashboardPage;

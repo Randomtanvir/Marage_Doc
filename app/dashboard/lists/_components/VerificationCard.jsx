@@ -46,9 +46,9 @@ const VerificationCard = ({ VerificationData }) => {
         throw new Error(data.message || "Failed to update status");
       }
 
-      // toast.success(
-      //   `Status ${!currentStatus ? "approved" : "set to pending"}!`
-      // );
+      toast.success(
+        `Status ${!currentStatus ? "approved" : "set to pending"}!`
+      );
       router.refresh();
     } catch (error) {
       console.error("Status update error:", error);

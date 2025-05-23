@@ -27,3 +27,14 @@ export const getSingleVerificationData = async (id) => {
     return { error: true, message: "data fetch error" };
   }
 };
+export const getSingleVerificationDataByURLLINK = async (url) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${url}`, {
+      cache: "no-store",
+    });
+    const data = await response.json();
+    return data?.application || {};
+  } catch (error) {
+    return { error: true, message: "data fetch error" };
+  }
+};

@@ -5,7 +5,7 @@ import VerificationDetails from "./VerificationDetails";
 import DocumentDetails from "./DocumentDetails";
 import TransactionDetails from "./TransactionDetails";
 
-const DigitalAttestationResult = () => {
+const DigitalAttestationResult = ({ verificationData }) => {
   return (
     <div className="border-1 relative font-calibri border-black md:p-10 p-5 bg-white m-0 md:m-[0px_17%] ">
       <div className="border border-gray-900 p-2">
@@ -13,19 +13,11 @@ const DigitalAttestationResult = () => {
         <div className="flex justify-between items-center">
           {/* Left Logo */}
           <div className="flex items-center">
-            <img
-              src="https://omanpostdocswallets.com/assets/img/logo1.png"
-              alt="Oman Post"
-              className=""
-            />
+            <img src="/logo1.png" alt="Oman Post" className="" />
           </div>
           {/* Right Logo */}
           <div>
-            <img
-              src="https://omanpostdocswallets.com/assets/img/logo2.png"
-              alt="Ministry Logo"
-              className=""
-            />
+            <img src="/logo2.png" alt="Ministry Logo" className="" />
           </div>
         </div>
 
@@ -50,16 +42,16 @@ const DigitalAttestationResult = () => {
         </div>
 
         {/* Transaction Details Table */}
-        <TransactionDetails />
+        <TransactionDetails verificationData={verificationData} />
 
         {/* Candidate Details Table */}
-        <CandidateDetails />
+        <CandidateDetails verificationData={verificationData} />
 
         {/* Verification Details Table */}
-        <VerificationDetails />
+        <VerificationDetails verificationData={verificationData} />
 
         {/* Document Details Table */}
-        <DocumentDetails />
+        <DocumentDetails verificationData={verificationData} />
 
         {/* Footer */}
         <div className="text-center mt-5 text-gray-400 text-[12px]">
