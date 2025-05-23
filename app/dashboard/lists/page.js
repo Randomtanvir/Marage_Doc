@@ -4,13 +4,13 @@ import { getAllVerificationData } from "@/utils/fetcher";
 
 const ListsPage = async () => {
   const verificationData = await getAllVerificationData();
-  console.log(verificationData, "verificationData");
 
   return (
     <div>
-      {verificationData?.map((veri) => (
-        <VerificationCard key={veri._id} VerificationData={veri} />
-      ))}
+      {verificationData?.length > 0 &&
+        verificationData?.map((veri) => (
+          <VerificationCard key={veri._id} VerificationData={veri} />
+        ))}
     </div>
   );
 };

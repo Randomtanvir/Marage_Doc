@@ -7,12 +7,11 @@ export const getAllVerificationData = async () => {
       }
     );
     const data = await response.json();
-    return data.verificationInfo || [];
+    return data?.verificationInfo || [];
   } catch (error) {
     return { error: true, message: "data fetch error" };
   }
 };
-
 export const getSingleVerificationData = async (id) => {
   try {
     const response = await fetch(
