@@ -1,10 +1,12 @@
 import DigitalAttestationResult from "@/components/DigitalAttestationResult";
-import Image from "next/image";
+import React from "react";
 
-export default function Home() {
+const page = () => {
   return (
-    <main className="bg-[#f5f7fa]">
+    <div>
       <DigitalAttestationResult />
-    </main>
+    </div>
   );
-}
+};
+
+export default page;

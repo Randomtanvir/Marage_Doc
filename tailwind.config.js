@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        calibri: ['Calibri', 'sans-serif'],
+      },
     },
   },
   plugins: [],
