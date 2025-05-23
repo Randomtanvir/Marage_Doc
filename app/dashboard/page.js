@@ -13,7 +13,7 @@ const DashboardPage = () => {
           className="flex items-center gap-3 p-5 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition"
         >
           <Plus className="w-5 h-5" />
-          <span className="text-base font-medium">Add a Certificate</span>
+          <span className="text-base font-medium">Add a Verification Info</span>
         </Link>
 
         <Link
